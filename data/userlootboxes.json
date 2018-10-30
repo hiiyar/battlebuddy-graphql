@@ -1,0 +1,32 @@
+[
+    {
+        "user_id": "#1",
+        "lootbox_id": "#1",
+        "status": "OPENED",
+        "dt_opened": "2017-10-10 15:00:12"
+    },
+    {
+        "user_id": "#1",
+        "lootbox_id": "#3",
+        "status": "CLOSED",
+        "dt_opened": null
+    },
+    {
+        "user_id": "#1",
+        "lootbox_id": "#5",
+        "status": "CLOSED",
+        "dt_opened": null
+    },
+    {
+        "user_id": "#2",
+        "lootbox_id": "#2",
+        "status": "OPENED",
+        "dt_opened": "2017-10-10 15:00:12"
+    },
+    {
+        "user_id": "#3",
+        "lootbox_id": "#5",
+        "status": "CLOSED",
+        "dt_opened": null
+    }
+]

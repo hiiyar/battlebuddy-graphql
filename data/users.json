@@ -1,0 +1,27 @@
+[
+    {
+        "id": "#1",
+        "name": "Diogo Mainardes",
+        "email" : "diogomainardes@gmail.com"
+    },
+    {
+        "id": "#2",
+        "name": "Ana Maria",
+        "email" : "ana.maria@gmail.com"
+    },
+    {
+        "id": "#3",
+        "name": "Jose Roberto",
+        "email" : "jose.roberto@gmail.com"
+    },
+    {
+        "id": "#4",
+        "name": "Juliana Silva",
+        "email" : "juliana.silva@gmail.com"
+    },
+    {
+        "id": "#5",
+        "name": "Carlos Andrade",
+        "email" : "carlos.andrade@gmail.com"
+    }
+]
