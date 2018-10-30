@@ -4,8 +4,9 @@ const _ = require('lodash');
 const lootboxes = require('../data/lootboxes.json');
 const users = require('../data/users.json');
 const userlootboxes = require('../data/userlootboxes.json');
+const boosts = require('../data/boosts.json');
 
-const { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLList } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLList, GraphQLFloat  } = graphql;
 
 const LootBoxType = new GraphQLObjectType({
    name: 'LootBox',
@@ -60,6 +61,16 @@ const UserType = new GraphQLObjectType({
     })
 })
 
+const BoostType = new GraphQLObjectType({
+    name: 'Boost',
+    description: 'Entity Boost on application',
+    fields: () => ({
+      id: { type: GraphQLString },
+      name: { type: GraphQLString },
+        value: { type: GraphQLFloat }
+    })
+})
+
 const RootQuery = new GraphQLObjectType({
    name: 'RootQuery',
    fields: {
@@ -88,6 +99,12 @@ const RootQuery = new GraphQLObjectType({
            type: GraphQLList(UserType),
            resolve(parent, args){
                return users;
+           }
+       },
+       boosts: {
+           type: GraphQLList(BoostType),
+           resolve(parent, args){
+               return boosts;
            }
        }
    }

@@ -1,0 +1,17 @@
+[
+    {
+        "id": "#1",
+        "name": "Boost Bronze",
+        "value": 2.50
+    },
+    {
+        "id": "#2",
+        "name": "Boost Silver",
+        "value": 4.50
+    },
+    {
+        "id": "#3",
+        "name": "Boost Gold",
+        "value": 7
+    }
+]
