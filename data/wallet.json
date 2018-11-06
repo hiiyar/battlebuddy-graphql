@@ -1,0 +1,26 @@
+[
+  {
+    "id": "#1",
+    "user_id": "#1",
+    "founds": "100.00",
+    "status": "ACTIVE"
+  },
+  {
+    "id": "#2",
+    "user_id": "#2",
+    "founds": "10.00",
+    "status": "ACTIVE"
+  },
+  {
+    "id": "#3",
+    "user_id": "#3",
+    "founds": "0.00",
+    "status": "ACTIVE"
+  },
+  {
+    "id": "#4",
+    "user_id": "#4",
+    "founds": "10.00",
+    "status": "ACTIVE"
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+      "id": "#ounducnd8w98emx9898",  
+      "boost_id": "#1",
+      "user_id": "#1",
+      "dt_used": "2018-01-01 18:00:00",
+      "status": "USED"
+  },
+  {
+      "id": "#131n3k1h3n13kh1k312",
+      "boost_id": "#1",
+      "user_id": "#1",
+      "dt_used": null,
+      "status": "OPEN"
+  },
+  {
+      "id": "#131n3knu2n3i42u4n24",
+      "boost_id": "#1",
+      "user_id": "#1",
+      "dt_used": null,
+      "status": "OPEN"
+  },
+  {
+      "id": "#lmlcadm98as9dms9d",
+      "boost_id": "#2",
+      "user_id": "#1",
+      "dt_used": null,
+      "status": "OPEN"
+  }
+]

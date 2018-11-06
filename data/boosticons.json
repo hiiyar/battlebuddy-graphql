@@ -1,0 +1,20 @@
+[
+  {
+      "id": "#1",
+      "boost_id": "#1",
+      "name": "bronze",
+      "extension": "png"
+  },
+  {
+    "id": "#2",
+    "boost_id": "#2",
+    "name": "silver",
+    "extension": "png"
+},
+{
+    "id": "#3",
+    "boost_id": "#3",
+    "name": "gold",
+    "extension": "png"
+}
+]

@@ -1,0 +1,31 @@
+[
+  {
+    "wallet_id": "#1",
+    "type": "DEBIT",
+    "value": 10.00,
+    "description": "Buying Boost Gold",
+    "dt_transaction": "2018-10-10 15:09:23"
+  },
+  {
+    "wallet_id": "#1",
+    "type": "DEBIT",
+    "value": 5.00,
+    "description": "Buying Boost Bronze",
+    "dt_transaction": "2018-10-10 15:09:23"
+  },
+  {
+    "wallet_id": "#1",
+    "type": "CREDIT",
+    "value": 100.00,
+    "description": "Adding Founds by credit card",
+    "dt_transaction": "2018-10-10 15:09:23"
+  },
+  {
+    "wallet_id": "#1",
+    "type": "CREDIT",
+    "value": 15.00,
+    "description": "Adding Founds by Credit Card",
+    "dt_transaction": "2018-10-10 15:09:23"
+  }
+
+]

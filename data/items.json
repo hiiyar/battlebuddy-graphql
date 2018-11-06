@@ -1,0 +1,22 @@
+[
+  {
+    "id": "#1",
+    "name": "IPhone 6S",
+    "description": "Item descriptions"
+  },
+  {
+    "id": "#2",
+    "name": "Gift Card $25",
+    "description": "Gift Cards $25"
+  },
+  {
+    "id": "#3",
+    "name": "Gift Card $50",
+    "description": "Gift Cards $50"
+  },
+  {
+    "id": "#4",
+    "name": "Gift Card $100",
+    "description": "Gift Cards $100"
+  }
+]

@@ -1,17 +1,23 @@
 [
     {
         "id": "#1",
-        "name": "Boost Bronze",
-        "value": 2.50
+        "name": "Bronze",
+        "value": 2.50,
+        "matches": 3,
+        "order": 3
     },
     {
         "id": "#2",
-        "name": "Boost Silver",
-        "value": 4.50
+        "name": "Silver",
+        "value": 4.50,
+        "order": 2,
+        "matches": 5
     },
     {
         "id": "#3",
-        "name": "Boost Gold",
-        "value": 7
+        "name": "Gold",
+        "value": 7,
+        "order": 1,
+        "matches": 10
     }
 ]
