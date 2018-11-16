@@ -1,5 +1,6 @@
 const graphql = require('graphql');
 const mongoose = require('mongoose');
+const sorter = require('../helpers/sorter');
 const _ = require('lodash');
 
 const userModel = require('../models/User');
@@ -26,8 +27,21 @@ const RootQuery = new GraphQLObjectType({
        },
        lootboxes: {
            type: GraphQLList(LootBoxType.query),
-           resolve(parent, args){
-                return lootboxModel.find();
+           args: { orderBy: {
+               type: GraphQLString
+           } },
+           resolve: async (parent, { orderBy = null }) => {
+
+                orderBy = sorter.makeSort(orderBy);
+                if (!orderBy)
+                    orderBy = sorter.makeSort("name_ASC");
+
+                let lootboxes = await lootboxModel.find({}).sort(orderBy);
+                
+                return lootboxes.map((x) => {
+                    x._id = x._id.toString();
+                    return x;
+                });
            }
        },
        user: {
@@ -39,13 +53,20 @@ const RootQuery = new GraphQLObjectType({
            }
        },
        users: {
-           type: GraphQLList(UserType.query),
-           resolve: async (parent, args) => {
-               let users = await userModel.find({});
-               return users.map((x) => {
-                x._id = x._id.toString();
-                return x;
-               });
+            type: GraphQLList(UserType.query),
+            args: { orderBy: {
+                type: GraphQLString
+            } },
+           resolve: async (parent, { orderBy = null }) => {
+                orderBy = sorter.makeSort(orderBy);
+                if (!orderBy)
+                    orderBy = sorter.makeSort("name_ASC");
+
+                let users = await userModel.find({}).sort(orderBy);
+                return users.map((x) => {
+                    x._id = x._id.toString();
+                    return x;
+                });
            }
        },
        boosts: {

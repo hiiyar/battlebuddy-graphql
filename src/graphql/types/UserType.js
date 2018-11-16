@@ -19,6 +19,8 @@ UserTypeFunction.query = new GraphQLObjectType({
         id: { type: GraphQLString },
         name: { type: GraphQLString },
         email: { type: GraphQLString },
+        updatedAt: { type: GraphQLString },
+        createdAt: { type: GraphQLString },
         wallet: {
             type: WalletType.query,
             resolve(parent, args){
