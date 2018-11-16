@@ -1,5 +1,6 @@
 const graphql = require('graphql');
 const { GraphQLObjectType, GraphQLString } = graphql;
+const ItemIconType = require('./ItemIconType');
 
 function ItemTypeFunction(){
 }
@@ -11,7 +12,8 @@ ItemTypeFunction.query = new GraphQLObjectType({
     fields: () => ({
         id: { type: GraphQLString },
         name: { type: GraphQLString },
-        description: { type: GraphQLString }
+        description: { type: GraphQLString },
+        icon: { type: ItemIconType.query }
     })
   });
 
