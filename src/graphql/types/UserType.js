@@ -1,5 +1,5 @@
 const graphql = require('graphql');
-const { GraphQLObjectType, GraphQLInputObjectType, GraphQLString, GraphQLList } = graphql;
+const { GraphQLObjectType, GraphQLInputObjectType, GraphQLString, GraphQLList, GraphQLID } = graphql;
 
 //GAMBETA
 function UserTypeFunction(){
@@ -40,7 +40,6 @@ UserTypeFunction.input = new GraphQLInputObjectType({
     name: 'UserInputType',
     description: 'User payload definition',
     fields: () => ({
-        id: { type: GraphQLString },
         name: { type: GraphQLString },
         email: { type: GraphQLString }
     }),

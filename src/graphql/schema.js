@@ -1,4 +1,5 @@
 const graphql = require('graphql');
+const mongoose = require('mongoose');
 const _ = require('lodash');
 
 const userModel = require('../models/User');
@@ -10,6 +11,8 @@ const UserType = require('./types/UserType');
 const BoostType = require('./types/BoostType');
 
 const { GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLSchema, GraphQLList, GraphQLFloat, GraphQLInt  } = graphql;
+
+const crypto = require('../helpers/crypto');
 
 const RootQuery = new GraphQLObjectType({
    name: 'RootQuery',
@@ -30,14 +33,19 @@ const RootQuery = new GraphQLObjectType({
        user: {
            type: UserType.query,
            args: { id: { type: GraphQLString }},
-           resolve(parent, args){
-               return userModel.find({id: args.id});
+           resolve: async (parent, { id }) => {
+               let user = await userModel.findOne({_id: id});
+               return user;
            }
        },
        users: {
            type: GraphQLList(UserType.query),
-           resolve(parent, args){
-               return userModel.find({});
+           resolve: async (parent, args) => {
+               let users = await userModel.find({});
+               return users.map((x) => {
+                x._id = x._id.toString();
+                return x;
+               });
            }
        },
        boosts: {
@@ -45,7 +53,27 @@ const RootQuery = new GraphQLObjectType({
            resolve(parent, args){
                return boostModel.find({});
            }
-       }
+       },
+        login: {
+            type: UserType.query,
+            args: {
+                email: { type: GraphQLString },
+                password: { type: GraphQLString },
+            },
+            resolve: async (parent, { email, password }) => {
+                let user = await userModel.findOne({email: email });
+                
+                if (!user){
+                    throw new Error('User not found...');
+                }
+                
+                if (!crypto.checkPasswordHash(password, user.password)) {
+                    throw new Error('Invalid login');
+                }
+                
+                return user;
+            },
+        }
    }
 });
 
@@ -55,34 +83,93 @@ const RootMutation = new GraphQLObjectType({
         createUser: {
             type: UserType.query,
             args: {
-                input: {
-                    type: new GraphQLNonNull(UserType.input),
-                },
+                name: { type: GraphQLString },
+                email: { type: GraphQLString },
+                pass: { type: GraphQLString },
             },
-            resolve: async (rootValue, { input }) => {
-                if (!isEmail(input.email)) {
+            resolve: async (parent, { name, email, pass }) => {
+                if (!email) {
                     throw new Error('The email is not in a valid format');
                 }
-                const result = await userModel.create(input);
+
+                let docs = await userModel.count({email: email});
+                if (docs > 0){
+                    throw new Error('Email in use by another user');
+                }
+
+                let user = new userModel({
+                    _id: new mongoose.Types.ObjectId(),
+                    name,
+                    email,
+                    password: crypto.createPasswordHash(pass),
+                    createdAt: (new Date()).toString(),
+                    updatedAt: (new Date()).toString()
+                });
+
+                const result = await user.save();
+                result.id = result._id.toString();
+
                 return result;
             },
         },
         updateUser: {
             type: UserType.query,
             args: {
-                id: { type: GraphQLInt },
-                input: {
-                    type: new GraphQLNonNull(UserType.input),
-                },
+                name: { type: GraphQLString },
+                id: { type: GraphQLString },
             },
-            resolve: async (rootValue, { input }) => {
-                if (!isEmail(input.email)) {
-                    throw new Error('The email is not in a valid format');
+            resolve: async (parent, { name, id }) => {
+                
+                let user = await userModel.findOne({_id: new mongoose.Types.ObjectId(id) });
+                
+                if (!user){
+                    throw new Error('User not found...');
                 }
-                const result = await userModel.findById(args.id).update(input);
+                
+                user.name = name;
+                user.updatedAt = (new Date()).toString();
+
+                const result = await user.save();
+                result.id = result._id.toString();
+
                 return result;
             },
         },
+        removeUser: {
+            type: UserType.query,
+            args: {
+                id: { type: GraphQLString },
+            },
+            resolve: async (parent, { id }) => {
+                
+                return await userModel.deleteOne({_id: new mongoose.Types.ObjectId(id) });
+                
+            },
+        },
+        changePass: {
+            type: UserType.query,
+            args: {
+                id: { type: GraphQLString },
+                newpass: { type: GraphQLString },
+            },
+            resolve: async (parent, { id, newpass }) => {
+                let user = await userModel.findOne({_id: new mongoose.Types.ObjectId(id) });
+                
+                if (!user){
+                    throw new Error('User not found...');
+                }
+                
+                newPassword = crypto.createPasswordHash(newpass);
+                
+                user.password = newPassword;
+                user.updatedAt = (new Date()).toString();
+
+                const result = await user.save();
+                result.id = result._id.toString();
+
+                return result;
+            },
+        }
     }
  });
 

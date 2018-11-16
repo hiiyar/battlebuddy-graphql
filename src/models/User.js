@@ -2,11 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  id:  String,
+  _id: mongoose.Schema.Types.ObjectId,
   name: String,
   email: String,
   validEmail: Boolean,
-  password: String,
+  password: {
+    salt: String,
+    passwordHash: String
+  },
   createdAt: Date,
   updatedAt: Date
 }, {collection: 'users'});
