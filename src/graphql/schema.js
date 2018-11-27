@@ -1,6 +1,7 @@
 const graphql = require('graphql');
 const mongoose = require('mongoose');
 const sorter = require('../helpers/sorter');
+const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 
 const userModel = require('../models/User');
@@ -10,6 +11,10 @@ const boostModel = require('../models/Boost');
 const LootBoxType = require('./types/LootboxType');
 const UserType = require('./types/UserType');
 const BoostType = require('./types/BoostType');
+const RouletteType = require('./types/RouletteType');
+const LoginType = require('./types/LoginType');
+
+const config = require('../config/app');
 
 const { GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLSchema, GraphQLList, GraphQLFloat, GraphQLInt  } = graphql;
 
@@ -76,7 +81,7 @@ const RootQuery = new GraphQLObjectType({
            }
        },
         login: {
-            type: UserType.query,
+            type: LoginType.query,
             args: {
                 email: { type: GraphQLString },
                 password: { type: GraphQLString },
@@ -92,8 +97,35 @@ const RootQuery = new GraphQLObjectType({
                     throw new Error('Invalid login');
                 }
                 
-                return user;
+                return {
+                    user,
+                    token: jwt.sign({id: user.id, email: user.email}, config.jwt.secret, {})
+                };
             },
+        },
+        roullete: {
+            type: RouletteType.query,
+            args: {
+                id: { type: GraphQLString }
+            },
+            resolve: async (parent, { id }) => {
+
+                return {
+                    id: "1321321312312312",
+                    name: "Lootbox de testes",
+                    items: [
+                        {
+                            id: "13123123213123",
+                            name: "Teste",
+                            icon: {
+                                name: "teste",
+                                extension: "png"
+                            }
+                        }
+                    ]
+                }
+
+            }
         }
    }
 });

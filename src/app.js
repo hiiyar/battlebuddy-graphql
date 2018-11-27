@@ -2,13 +2,14 @@ const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const rootSchema = require('./graphql/schema');
 const cors = require('./middlewares/cors');
-const config = require('./config/config');
+const database = require('./config/database');
+const appConfig = require('./config/app');
 const mongoose = require('mongoose');
 
 const app = express();
 
 // Connect on Mongo Database
-mongoose.connect(config.connectionString('mongodb'), { useNewUrlParser: true })
+mongoose.connect(database.connectionString('mongodb'), { useNewUrlParser: true })
 .then(() => {
     console.info('Conectado no MongoDB... :)');
 }).catch((err) => {
@@ -25,6 +26,6 @@ app.use('/graphql', graphqlHTTP({
 }));
 
 // Start Server
-app.listen(5000, () => {
-   console.log('API BattleBuddy iniciada... port 5000');
+app.listen(appConfig.node_port, () => {
+   console.log('API BattleBuddy iniciada... port 5005');
 });
