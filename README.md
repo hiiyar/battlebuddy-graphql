@@ -72,3 +72,50 @@ Go to your browser and type address [http://localhost:5000/graphql](http://local
   }
 }
 ```
+
+* Order by samples
+
+```sh
+{
+  users(orderBy: "name_ASC"){
+    id
+    name
+    email
+  }
+}
+```
+
+```sh
+{
+  users(orderBy: "email_DESC"){
+    id
+    name
+    email
+  }
+}
+```
+
+* Login with token field
+
+```sh
+{
+  login(email:"diogo@teste.com", password: "123"){
+    user{
+      id
+      name
+      email
+    }
+    token
+  }
+}
+```
+
+```sh
+{
+  users(orderBy: "email_DESC"){
+    id
+    name
+    email
+  }
+}
+```
