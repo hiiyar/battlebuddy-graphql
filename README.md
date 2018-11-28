@@ -109,13 +109,3 @@ Go to your browser and type address [http://localhost:5000/graphql](http://local
   }
 }
 ```
-
-```sh
-{
-  users(orderBy: "email_DESC"){
-    id
-    name
-    email
-  }
-}
-```
