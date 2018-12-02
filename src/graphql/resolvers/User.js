@@ -1,4 +1,5 @@
 const WalletModel = require('../../models/Wallet');
+const UserLootboxModel = require('../../models/UserLootbox');
 
 const User = {
     
@@ -9,8 +10,13 @@ const User = {
   }, 
 
   lootboxes: async (parent, args, ctx, info) => {
-    console.log('Dr Hans Chucrutes...');
-    return null;
+    const lootboxes = await UserLootboxModel.find({"user._id": parent.id}).select('lootbox');
+    return lootboxes.map(x => {
+      x = x.lootbox;
+      x = x.toObject();
+      x.id = x._id.toString();
+      return x;
+    });
   }
 
 }

@@ -97,7 +97,7 @@ type Boost {
   value: Float,
   index: Int!,
   matches: Int,
-  icon: [Icon]
+  icons: [Icon]
 }
 
 type Login {

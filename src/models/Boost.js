@@ -9,8 +9,10 @@ const boostSchema = new Schema({
   index: Number,
   icons: [
     {
+      type: { type: String },
       name: String,
-      extension: String
+      extension: String,
+      url: String
     }
   ]
 }, {collection: 'boosts'});
