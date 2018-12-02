@@ -1,0 +1,113 @@
+type Query {
+  lootbox(id: String): Lootbox
+  lootboxes(orderBy: [LootboxesSortOptions]): [Lootbox]
+  user(id: String): User
+  users(orderBy: [UsersSortOptions]): [User]
+  boosts(orderBy: [BoostsSortOptions]): [Boost]
+  login(email: String!, password: String!): Login
+  roulette(idUserLootbox: String!): Roulette
+}
+
+type Mutation {
+  createUser(name: String!, email: String!, password: String!): User!
+  updateUser(id: String!, name: String!): User!
+  removeUser(id: String!): User
+  changePassword(id: String!, newPassword: String!): User
+}
+
+enum UsersSortOptions {
+  name_ASC
+  name_DESC
+  email_ASC
+  email_DESC
+}
+
+enum BoostsSortOptions {
+  index_ASC
+  index_DESC
+}
+
+enum LootboxesSortOptions {
+  name_ASC
+  name_DESC
+}
+
+type User {
+  id: String
+  name: String
+  email: String
+  updated_at: String
+  created_at: String
+  wallet: Wallet
+  lootboxes: [Lootbox]
+}
+
+type Wallet {
+  id: String!
+  user_id: String!
+  status: String!
+  funds: Float
+  transactions: [Transaction]
+}
+
+type Transaction {
+  wallet: Wallet
+  type: String
+  value: Float
+  description: String
+  transaction_date: String
+}
+
+type Lootbox {
+  id: String
+  name: String
+  items: [Item]
+  icons: [Icon]
+}
+
+type Item {
+  id: String,
+  name: String,
+  description: String,
+  icons: [Icon]
+}
+
+type Icon {
+  type: String,
+  name: String,
+  extension: String,
+  url: String
+}
+
+type Inventory {
+  id: String
+  status: String
+  open_time: Int
+  opened_at: Int 
+  created_at: Int
+  updated_at: Int
+  selected_item: String
+  lootbox: Lootbox
+  user: User
+}
+
+type Boost {
+  id: String!,
+  name: String!,
+  value: Float,
+  index: Int!,
+  matches: Int,
+  icon: [Icon]
+}
+
+type Login {
+  user: User,
+  token: String
+}
+
+type Roulette {
+  selected_item: String,
+  user: User,
+  lootbox: Lootbox
+  items: [Item]
+}

@@ -109,3 +109,33 @@ Go to your browser and type address [http://localhost:5000/graphql](http://local
   }
 }
 ```
+
+
+* Roulette items
+
+```sh
+query {
+  roulette(idUserLootbox: "5c02e7df4b1002be45cac1f9"){
+    lootbox{
+      id
+      name
+    }
+    user{
+      id
+      email
+      name
+    }
+    items{
+      id
+      name
+      description
+      icons{
+        type
+        name
+        url
+        extension
+      }
+    }
+  }
+}
+```

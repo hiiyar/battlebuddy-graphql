@@ -10,8 +10,8 @@ const userSchema = new Schema({
     salt: String,
     passwordHash: String
   },
-  createdAt: Date,
-  updatedAt: Date
+  created_at: Date,
+  updated_at: Date
 }, {collection: 'users'});
 
 const UserModel = mongoose.model('UserModel', userSchema);

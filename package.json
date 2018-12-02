@@ -5,19 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/app.js"
+    "start": "nodemon --ext js,graphql src/app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "apollo-client": "^2.4.5",
+    "apollo-server-express": "^2.2.5",
     "crypto": "^1.0.1",
     "express": "^4.16.4",
-    "express-graphql": "^0.7.1",
     "graphql": "^14.0.2",
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.11",
-    "mongoose": "^5.3.9"
+    "mongoose": "^5.3.14"
   }
 }

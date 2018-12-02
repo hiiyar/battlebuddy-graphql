@@ -1,12 +1,21 @@
 const mongoose = require('mongoose');
 
 const lootboxSchema = new mongoose.Schema({
-  id:  { type: String },
-  name: { type: String },
+  _id: mongoose.Schema.Types.ObjectId,
+  name: String,
+  items: [
+    {
+      _id: mongoose.Schema.Types.ObjectId,
+      name: String,
+      description: String
+    }
+  ],
   icons: [
     {
-      name: { type: String },
-      extension: { type: String }
+      type: String,
+      name: String,
+      extension: String,
+      url: String
     }
   ]
 }, { collection: 'lootboxes' });
