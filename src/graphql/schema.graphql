@@ -38,6 +38,7 @@ type User {
   email: String
   updated_at: String
   created_at: String
+  avatar: String
   wallet: Wallet
   lootboxes: [Lootbox]
 }

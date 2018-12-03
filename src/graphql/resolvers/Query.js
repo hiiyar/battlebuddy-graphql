@@ -34,9 +34,7 @@ const Query = {
     let rouletteItems = [];
 
     if (lootbox.items){
-      const items = lootbox.items.filter((x) => {
-        return x.id !== userLootbox.selected_item;
-      });
+      const items = lootbox.items;
       
       const selected = lootbox.items.filter((x) => {
         return x.id === userLootbox.selected_item;
@@ -60,13 +58,11 @@ const Query = {
   login: async (parent, { email, password }, ctx, info) => {
     let user = await UserModel.findOne({email: email });
               
-    if (!user){
-        throw new Error('User not found...');
-    }
+    if (!user)
+      throw new Error('User not found...');
     
-    if (!crypto.checkPasswordHash(password, user.password)) {
-        throw new Error('Invalid login');
-    }
+    if (!crypto.checkPasswordHash(password, user.password)) 
+      throw new Error('Invalid login');
     
     return {
         user,

@@ -5,14 +5,15 @@ const userSchema = new Schema({
   _id: mongoose.Schema.Types.ObjectId,
   name: String,
   email: String,
-  validEmail: Boolean,
+  valid_email: Boolean,
+  avatar: String,
   password: {
     salt: String,
-    passwordHash: String
+    password_hash: String
   },
   created_at: Date,
   updated_at: Date
-}, {collection: 'users'});
+}, { collection: 'users' });
 
 const UserModel = mongoose.model('UserModel', userSchema);
 
