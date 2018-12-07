@@ -14,6 +14,7 @@ const LootboxResolver  = require('./graphql/resolvers/Lootbox');
 const RouletteResolver  = require('./graphql/resolvers/Roulette');
 const ItemResolver  = require('./graphql/resolvers/Item');
 const BoostResolver  = require('./graphql/resolvers/Boost');
+const UserLootboxResolver  = require('./graphql/resolvers/UserLootbox');
 
 const app = express();
 
@@ -37,7 +38,8 @@ const server = new ApolloServer({
         Roulette: RouletteResolver,
         Boost: BoostResolver,
         Item: ItemResolver,
-        Mutation: MutationResolver
+        Mutation: MutationResolver,
+        UserLootbox: UserLootboxResolver
     },
     graphiql: true,
     graphqlPath: "graphql"

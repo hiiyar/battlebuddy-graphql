@@ -9,12 +9,11 @@ const User = {
     return wallet;
   }, 
 
-  lootboxes: async (parent, args, ctx, info) => {
-    const lootboxes = await UserLootboxModel.find({"user._id": parent.id}).select('lootbox');
-    return lootboxes.map(x => {
-      x = x.lootbox;
-      x = x.toObject();
-      x.id = x._id.toString();
+  inventory: async (parent, args, ctx, info) => {
+    const inventory = await UserLootboxModel.where({"user._id": parent.id});
+    
+    return inventory.map(x => {
+      x.server_time = (new Date()).toISOString();
       return x;
     });
   }

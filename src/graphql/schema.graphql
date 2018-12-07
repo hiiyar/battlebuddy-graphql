@@ -13,6 +13,7 @@ type Mutation {
   updateUser(id: String!, name: String!): User!
   removeUser(id: String!): User
   changePassword(id: String!, newPassword: String!): User
+  openLootbox(id: String!): UserLootbox
 }
 
 enum UsersSortOptions {
@@ -40,7 +41,7 @@ type User {
   created_at: String
   avatar: String
   wallet: Wallet
-  lootboxes: [Lootbox]
+  inventory: [UserLootbox]
 }
 
 type Wallet {
@@ -80,13 +81,14 @@ type Icon {
   url: String
 }
 
-type Inventory {
+type UserLootbox {
   id: String
   status: String
-  open_time: Int
-  opened_at: Int 
-  created_at: Int
-  updated_at: Int
+  open_time: String
+  server_time: String
+  opened_at: String 
+  created_at: String
+  updated_at: String
   selected_item: String
   lootbox: Lootbox
   user: User

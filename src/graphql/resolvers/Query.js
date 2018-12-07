@@ -29,7 +29,7 @@ const Query = {
   roulette: async (parent, { idUserLootbox }, ctx, info) => {
     const userLootbox = await UserLootboxModel.findOne({_id: idUserLootbox});
     const lootbox = userLootbox.lootbox;
-    const positionItemSelected = 20;
+    const positionItemSelected = 48;
     const countItemsRoulette = 50;
     let rouletteItems = [];
 

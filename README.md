@@ -139,3 +139,17 @@ query {
   }
 }
 ```
+
+* Open an user lootbox
+
+```sh
+mutation {
+  openLootbox(id: "5c02e7df4b1002be45cac1f9"){
+    id
+    status
+    opened_at
+    updated_at
+    created_at
+  }
+}
+```

@@ -2,6 +2,7 @@ const crypto = require('../../helpers/crypto');
 const mongoose = require('mongoose');
 
 const UserModel = require('../../models/User');
+const UserLootboxModel = require('../../models/UserLootbox');
 
 const Mutation = {
   createUser: async (parent, { name, email, password }, ctx, info) => {
@@ -66,6 +67,23 @@ const Mutation = {
 
     return result;
       
+  },
+
+  openLootbox: async (parent, { id }, ctx, info) => {
+
+    let lootboxToOpen = await UserLootboxModel.findOne({"_id": id });
+    
+    if (!lootboxToOpen)
+        throw new Error('No lootbox found for this user...');
+    
+    lootboxToOpen.status = "OPENED";
+    lootboxToOpen.opened_at = (new Date()).toISOString();
+    lootboxToOpen.updated_at = (new Date()).toISOString();
+
+    const result = await lootboxToOpen.save();
+    result.id = result._id.toString();
+
+    return result;
   },
   
 }
