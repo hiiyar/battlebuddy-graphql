@@ -30,13 +30,17 @@ var sha512 = function(password, salt){
 
 module.exports = { 
   createPasswordHash: (password) => {
-    return sha512(password, genRandomString(16));
+    const newPass = sha512(password, genRandomString(16));
+    return {
+      salt: newPass.salt,
+      password_hash: newPass.passwordHash
+    };
   },
   checkPasswordHash: (passwordToCheck, storedHash) => {
 
     let pass = sha512(passwordToCheck, storedHash.salt);
 
-    return (pass.passwordHash == storedHash.passwordHash);
+    return (pass.passwordHash == storedHash.password_hash);
   }
 }
 
